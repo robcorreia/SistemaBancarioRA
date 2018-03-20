@@ -5,27 +5,20 @@ import javax.swing.JOptionPane;
 public class SistemaBancario {
 
 	public static void main(String[] args) {
-		/*Desenvolver um algoritmo que
-defina um menu para o sistema
-bancário, seguindo o padrão:
-1- Criar conta;
-2- Saque;
-3- Depósito;
-4- Transferência;
-5- Aplicar na poupança;
-6- Aplicar no fundo;
-7- Simulação;
-8- Verificar Saldo;
-9- Histórico de transações;
-10-Sair.
-Postar o projeto compactado no
-Moodle.*/
+		
+		/*Atualizar o código desenvolvido anteriormente, adicionando um algoritmo que permita a 
+		 * criação de apenas uma conta, solicitando o nome do cliente, cpf, data de nascimento,
+		 *  gênero, senha. Ao realizar a criação de uma conta, o saldo da conta deverá iniciar 
+		 *  em zero. Postar o projeto compactado no Moodle.*/
+		
 		
 		
 		JOptionPane.showConfirmDialog(null, "Bem vindo ao Sistema Bancário RA - Deseja continuar?");
 		
 		
 		int opcao;
+		String nome, cpf, dataNasc, genero, senha;
+		double saldo=0;
 		
 		opcao=Integer.parseInt(JOptionPane.showInputDialog(
 				"1- Criar conta\r\n" + 
@@ -40,9 +33,17 @@ Moodle.*/
 				"10-Sair\n\n Digite a opção desejada: "));
 		
 		if(opcao==1) {
-			JOptionPane.showMessageDialog(null,"Criar conta");
+			JOptionPane.showMessageDialog(null,"Criando sua conta conta...");
+			nome=JOptionPane.showInputDialog("Digite seu nome: ");
+			cpf=JOptionPane.showInputDialog("Digite seu CPF: ");
+			dataNasc=JOptionPane.showInputDialog("Digite sua data de nascimento: (dd/mm/aaaa)");
+			genero=JOptionPane.showInputDialog("Digite seu sexo:");
+			senha=JOptionPane.showInputDialog("Digite sua senha:");
+			
+			JOptionPane.showMessageDialog(null, "Seus dados:\nNome: "+nome+"\nCPF: "+cpf+"\nData de nascimento: "+dataNasc+"\nSexo: "+genero+"\n\nSaldo da conta: "+saldo+" reais.");
 		}else if(opcao==2) {
 			JOptionPane.showMessageDialog(null,"Saque");
+			
 			
 		}else if(opcao==3) {
 			JOptionPane.showMessageDialog(null,"Depósito");
@@ -72,6 +73,7 @@ Moodle.*/
 		}else {
 			JOptionPane.showMessageDialog(null,"Operação inválida, tente novamente!");
 		}
+		
 		
 	}
 
