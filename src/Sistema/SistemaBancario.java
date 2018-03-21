@@ -6,19 +6,13 @@ public class SistemaBancario {
 
 	public static void main(String[] args) {
 		
-		/*Atualizar o código desenvolvido anteriormente, adicionando um algoritmo que permita a 
-		 * criação de apenas uma conta, solicitando o nome do cliente, cpf, data de nascimento,
-		 *  gênero, senha. Ao realizar a criação de uma conta, o saldo da conta deverá iniciar 
-		 *  em zero. Postar o projeto compactado no Moodle.*/
-		
-		
 		
 		JOptionPane.showConfirmDialog(null, "Bem vindo ao Sistema Bancário RA - Deseja continuar?");
 		
 		
 		int opcao;
-		String nome, cpf, dataNasc, genero, senha;
-		double saldo=0;
+		String nome, cpf, dataNasc, genero, senha="";
+		double saldo=0, saque=0;
 		
 		opcao=Integer.parseInt(JOptionPane.showInputDialog(
 				"1- Criar conta\r\n" + 
@@ -42,7 +36,15 @@ public class SistemaBancario {
 			
 			JOptionPane.showMessageDialog(null, "Seus dados:\nNome: "+nome+"\nCPF: "+cpf+"\nData de nascimento: "+dataNasc+"\nSexo: "+genero+"\n\nSaldo da conta: "+saldo+" reais.");
 		}else if(opcao==2) {
-			JOptionPane.showMessageDialog(null,"Saque");
+			String s;
+			JOptionPane.showMessageDialog(null,"Opção saque selecionada...");
+			saque=Double.parseDouble(JOptionPane.showInputDialog("Digite o valor que deseja sacar:"));
+			s=JOptionPane.showInputDialog("Digite sua senha:");
+			if(s.equalsIgnoreCase(senha)) {
+				JOptionPane.showMessageDialog(null,"Foram sacados R$ "+saque+" reais");
+			}
+			
+			
 			
 			
 		}else if(opcao==3) {
