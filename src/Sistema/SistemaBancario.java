@@ -1,11 +1,11 @@
-
+package Sistema;
 import javax.swing.JOptionPane;
 
-public class SistemaBancarioRA {
+public class SistemaBancario {
 
 	public static void main(String[] args) {
 
-		JOptionPane.showConfirmDialog(null, "Bem vindo ao Sistema Banc·rio RA - Deseja continuar?");
+		JOptionPane.showConfirmDialog(null, "Bem vindo ao Sistema Banc√°rio RA - Deseja continuar?");
 
 		Integer opcao;
 		double investimento = 0; // antonio
@@ -15,123 +15,221 @@ public class SistemaBancarioRA {
 		double fundo = 0;
 		String nome, cpf, dataNasc, genero;
 		String senha = "0000";
-		double saldo = 400, saque = 0;
+		double saque = 0;
 		int menu = 0;
 		int contRedimenPoupa = 0;
 		int contRedimenAplic = 0;
+		
+		double saldo[] = new double [999999];
+		
+		String vetorConta[] = new String [9999999];
+		String vetorNome [] = new String [9999999];
+		String vetorCpf[] = new String [9999999];
+		String vetorDataNas[] = new String[9999999];
+		String vetorGenero[] = new String [9999999];
+		String vetorSenha[] = new String [9999999];
+		int validador[] = new int [9999999];
+		int numConta = 0;
+		
+		
 		opcao = 0;
 		do {
 			while (opcao != 10) {
 				opcao = Integer.parseInt(JOptionPane.showInputDialog("1- Criar conta\r\n" + "2- Saque\r\n"
-						+ "3- DepÛsito\r\n" + "4- TransferÍncia\r\n" + "5- Aplicar na poupanÁa\r\n"
-						+ "6- Aplicar no fundo\r\n" + "7- SimulaÁ„o\r\n" + "8- Verificar Saldo\r\n"
-						+ "9- HistÛrico de transaÁıes\r\n" + "10-Sair\n\n Digite a opÁ„o desejada: "));
+						+ "3- Dep√≥sito\r\n" + "4- Transfer√™ncia\r\n" + "5- Aplicar na poupan√ßa\r\n"
+						+ "6- Aplicar no fundo\r\n" + "7- Simula√ß√£o\r\n" + "8- Verificar Saldo\r\n"
+						+ "9- Hist√≥rico de transa√ß√µes\r\n" + "10-Sair\n\n Digite a op√ß√£o desejada: "));
 				if (opcao > 10 && opcao < 1) {
-					JOptionPane.showMessageDialog(null, "OperaÁ„o inv·lida, tente novamente.");
+					JOptionPane.showMessageDialog(null, "Opera√ß√£o inv√°lida, tente novamente.");
 				}
 
 				if (opcao == 1) {
-					JOptionPane.showMessageDialog(null, "Criando sua conta conta...");
-					nome = JOptionPane.showInputDialog("Digite seu nome: ");
-					cpf = JOptionPane.showInputDialog("Digite seu CPF: ");
-					dataNasc = JOptionPane.showInputDialog("Digite sua data de nascimento: (dd/mm/aaaa)");
-					genero = JOptionPane.showInputDialog("Digite seu sexo:");
-					senha = JOptionPane.showInputDialog("Digite sua senha: ");
-
+					JOptionPane.showMessageDialog(null,"Criando sua conta conta...");
+					nome= JOptionPane.showInputDialog("Digite seu nome: ");  
+					cpf=JOptionPane.showInputDialog("Digite seu CPF: ");
+					dataNasc=JOptionPane.showInputDialog("Digite sua data de nascimento: (dd/mm/aaaa)");
+					genero=JOptionPane.showInputDialog("Digite seu sexo:");
+					senha=JOptionPane.showInputDialog("Digite sua senha: ");
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite o numero da conta para ser criada: "));
+					JOptionPane.showMessageDialog(null, "Seus dados:\nNome: "+nome+"\nCPF: "+cpf+"\nData de nascimento: "+dataNasc+"\nSexo: "+genero+"\n\nSaldo da conta: "+saldo+" reais.");
+					vetorNome [numConta] = nome;
+					vetorCpf[numConta] = cpf;
+					vetorDataNas[numConta] = dataNasc;
+					vetorGenero[numConta] = genero;
+					vetorSenha[numConta] = senha;
+					validador[numConta] = numConta;
+					saldo[numConta] = 400;
+					
 					JOptionPane.showMessageDialog(null,
 							"Seus dados:\nNome: " + nome + "\nCPF: " + cpf + "\nData de nascimento: " + dataNasc
 									+ "\nSexo: " + genero + "\n\nSaldo da conta: " + saldo + " reais.");
 				} else if (opcao == 2) {
-					String s = "0";
-					JOptionPane.showMessageDialog(null, "OpÁ„o saque selecionada...");
-					s = JOptionPane.showInputDialog("Digite sua senha:");
-					while (!s.equalsIgnoreCase(senha)) {
-						s = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite sua conta: "));
+					saldo[numConta] = saldo[numConta];
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta! Tente novamente: "));
+					}
+					
+					while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					}
+					
+					
+					JOptionPane.showMessageDialog(null, "Op√ß√£o saque selecionada...");
+					vetorSenha[numConta] = JOptionPane.showInputDialog("Digite sua senha:");
+					while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
 					}
 
 					saque = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor que deseja sacar:"));
-					while (saque > saldo || saque <= 0) {
+					while (saque > saldo[numConta] || saque <= 0) {
 						saque = Double.parseDouble(
-								JOptionPane.showInputDialog("Valor inv·lido, digite um valor acima de 0:"));
+								JOptionPane.showInputDialog("Valor inv√°lido, digite um valor acima de 0:"));
 					}
-					if (s.equalsIgnoreCase(senha)) {
-						while (saque > saldo || saque <= 0) {
+					if (vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						while (saque > saldo[numConta] || saque <= 0) {
 							saque = Double.parseDouble(JOptionPane.showInputDialog("Saldo indisponivel!!"));
 						}
-						if (saque <= saldo) {
+						if (saque <= saldo[numConta] ) {
 							JOptionPane.showMessageDialog(null, "Foram sacados R$ " + saque + " reais");
-						} else if (saque > saldo) {
-							JOptionPane.showMessageDialog(null, "ImpossÌvel sacar, saldo indisponÌvel");
+						} else if (saque > saldo[numConta]) {
+							JOptionPane.showMessageDialog(null, "Imposs√≠vel sacar, saldo indispon√≠vel");
 						} else {
 							JOptionPane.showMessageDialog(null, "Error inesperado em saque!!");
 						}
 					}
-					saldo = saldo - saque;
+					
+					saldo[numConta] = saldo[numConta] - saque;
 
 				}
 
 				else if (opcao == 3) {
+					JOptionPane.showMessageDialog(null, "Op√ß√£o de dep√≥sito selecionada...");
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite sua conta para deposito: "));
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta! Tente novamente: "));
+					}
+					
 					double deposito;
-					JOptionPane.showMessageDialog(null, "OpÁ„o de depÛsito selecionada...");
 					deposito = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor que deseja depositar:"));
 					while (deposito <= 0) {
 						deposito = Double.parseDouble(JOptionPane
-								.showInputDialog("Error DEPOSITO(valor inferior ouu igual · 0). Tente novamente:"));
+								.showInputDialog("Error DEPOSITO(valor inferior ouu igual √° 0). Tente novamente:"));
 					}
-					saldo += deposito;
+					saldo[numConta] += deposito;
 					JOptionPane.showMessageDialog(null, "Saldo realizado com sucesso!");
 
 				} else if (opcao == 4) {
-					JOptionPane.showMessageDialog(null, "TransferÍncia");
+					JOptionPane.showMessageDialog(null, "Transfer√™ncia");
+
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite sua conta: "));
+					saldo[numConta] = saldo[numConta];
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta ou inexistente! Tente novamente: "));
+					}
+					
+					while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					}
+					
+					double tranferencia = 0;
+					tranferencia = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor que deseja tranferir:"));
+					while (tranferencia > saldo[numConta] || tranferencia <= 0) {
+						tranferencia = Double.parseDouble(
+								JOptionPane.showInputDialog("Valor inv√°lido, digite um valor acima de 0:"));
+					}
+					if (vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						while (tranferencia > saldo[numConta] || tranferencia <= 0) {
+							saque = Double.parseDouble(JOptionPane.showInputDialog("Saldo indisponivel!!"));
+						}
+						if (tranferencia <= saldo[numConta] ) {
+							JOptionPane.showMessageDialog(null, "Foram transferidos R$ " + tranferencia + " reais");
+						} else if (tranferencia > saldo[numConta]) {
+							JOptionPane.showMessageDialog(null, "Imposs√≠vel transferir, saldo indispon√≠vel");
+						} else {
+							JOptionPane.showMessageDialog(null, "Error inesperado em transferir!!");
+						}
+					}
+					
+
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite a conta para transferir "));
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta! Tente novamente: "));
+					}
+					
+					saldo[numConta] += tranferencia;
+					JOptionPane.showMessageDialog(null, "Tranferencia realizada com sucesso!" + saldo[numConta]);
+					
+					
+					
 
 				} else if (opcao == 5) {
-					String s = "0";
-					JOptionPane.showMessageDialog(null, "OpÁ„o de investimento selecionada...");
-					s = JOptionPane.showInputDialog("Digite sua senha:");
-					while (!s.equalsIgnoreCase(senha)) {
-						s = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					JOptionPane.showMessageDialog(null, "Op√ß√£o de investimento selecionada...");
+
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite sua conta: "));
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta! Tente novamente: "));
 					}
-					if (saldo > 0) {
-						investimento = Double
-								.parseDouble(JOptionPane.showInputDialog("Qual o valor do investimento? "));
-						while (investimento > saldo) {
+
+					vetorSenha[numConta] = JOptionPane.showInputDialog("Digite sua senha:");
+					while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					}
+					
+					
+					if (saldo[numConta] > 0) {
+						investimento = Double.parseDouble(JOptionPane.showInputDialog("Qual o valor do investimento? "));
+						while (investimento > saldo[numConta]) {
 							investimento = Double.parseDouble(JOptionPane
 									.showInputDialog("Valor de investimento maior que saldo! Tente novamente."));
 						}
-						while (investimento <= 0 || investimento > saldo) {
+						while (investimento <= 0 || investimento > saldo[numConta]) {
 							investimento = Double.parseDouble(
-									JOptionPane.showInputDialog("Valor de investimento inv·lido! Tente novamente."));
+									JOptionPane.showInputDialog("Valor de investimento inv√°lido! Tente novamente."));
 						}
-						saldo = saldo - investimento;
+						saldo[numConta] = saldo[numConta] - investimento;
 						totalInvestimento = (investimento * redimentoPoupaca);
 						JOptionPane.showMessageDialog(null,
-								"Valor do investimento: " + investimento + ", rendimento di·rio: " + totalInvestimento);
+								"Valor do investimento: " + investimento + ", rendimento di√°rio: " + totalInvestimento);
 					} else {
 						JOptionPane.showMessageDialog(null, "Saldo indisponivel!!");
 					}
 
 				} else if (opcao == 6) {
-					String s = "0";
-					JOptionPane.showMessageDialog(null, "OpÁ„o de Aplicar no fundo selecionada...");
+					JOptionPane.showMessageDialog(null, "Op√ß√£o de Aplicar no fundo selecionada...");
 
+					numConta=Integer.parseInt(JOptionPane.showInputDialog("Digite sua conta: "));
+					saldo[numConta] = saldo[numConta];
+					while(numConta != validador[numConta]) {
+						numConta=Integer.parseInt(JOptionPane.showInputDialog("Conta incorreta ou inexistente! Tente novamente: "));
+					}
+					
+					while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					}
+					
+					
+					
+					
 					double valorAplicar = Double
-							.parseDouble(JOptionPane.showInputDialog("Digite o valor que vocÍ deseja aplicar:"));
-					while (valorAplicar > saldo || valorAplicar < 0) {
+							.parseDouble(JOptionPane.showInputDialog("Digite o valor que voc√™ deseja aplicar:"));
+					while (valorAplicar > saldo[numConta] || valorAplicar < 0) {
 						valorAplicar = Double.parseDouble(
-								JOptionPane.showInputDialog("Valor indisponÌvel na conta, digite um valor v·lido:"));
+								JOptionPane.showInputDialog("Valor indispon√≠vel na conta, digite um valor v√°lido:"));
 					}
-					if (valorAplicar < saldo) {
-						s = JOptionPane.showInputDialog("Digite sua senha:");
-						while (!s.equalsIgnoreCase(senha)) {
-							s = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
-						}
-						if (s.equalsIgnoreCase(senha)) {
+					if (valorAplicar < saldo[numConta]) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Digite sua senha:");
+						while (!vetorSenha[numConta].equalsIgnoreCase(senha)) {
+						vetorSenha[numConta] = JOptionPane.showInputDialog("Senha incorreta. Digite sua senha novamente:");
+					}
+					
+						if (vetorSenha[numConta].equalsIgnoreCase(senha)) {
 							fundo = fundo + valorAplicar;
-							saldo = saldo - valorAplicar;
+							saldo[numConta] = saldo[numConta] - valorAplicar;
 						}
 					}
-					JOptionPane.showMessageDialog(null, "OperaÁ„o realizada com sucesso! Seu rendimento ser· de "
-							+ rendimentoAplicacaoFundo + " di·rio.");
+					JOptionPane.showMessageDialog(null, "Opera√ß√£o realizada com sucesso! Seu rendimento ser√° de "
+							+ rendimentoAplicacaoFundo + " di√°rio.");
 
 				} else if (opcao == 7) {
 					float operaFinancia = 0;
@@ -142,7 +240,7 @@ public class SistemaBancarioRA {
 					float juros = 0f;
 					while (operaFinancia  <1 || operaFinancia  > 2) {
 						operaFinancia = Float.parseFloat(JOptionPane.showInputDialog(
-								"Digite 1 - Financiamento ImÛvel \nDigite 2 - Financiamento VeÌculo"));
+								"Digite 1 - Financiamento Im√≥vel \nDigite 2 - Financiamento Ve√≠culo"));
 					}
 					
 
@@ -157,11 +255,11 @@ public class SistemaBancarioRA {
 					if (operaFinancia == 1) {
 						juros = (taxaImovel * valorFina);
 						JOptionPane.showMessageDialog(null, "Valor do finasciamento do imovel: R$ " + valorFina
-								+ "reais.\n" + "Valor do juros em "+quantParcelas+" de R$ "+valorFina/quantParcelas+"reais.\n"  + juros + " Ao mÍs! "+"\n" + "Valor total: R$ " + juros+valorFina+" reais.");
+								+ "reais.\n" + "Valor do juros em "+quantParcelas+" de R$ "+valorFina/quantParcelas+"reais.\n"  + juros + " Ao m√™s! "+"\n" + "Valor total: R$ " + juros+valorFina+" reais.");
 					} else if (operaFinancia  == 2) {
 						juros = (taxaAutomo * valorFina);
 						JOptionPane.showMessageDialog(null, "Valor do finasciamento do carro: R$ " + valorFina
-								+ " reais.\n" + "Valor do juros em "+quantParcelas+" de R$ "+valorFina/quantParcelas+" reais.\n"  + juros + " Ao mÍs! "+"\n" + "Valor total: R$ " + juros+valorFina+" reais.");
+								+ " reais.\n" + "Valor do juros em "+quantParcelas+" de R$ "+valorFina/quantParcelas+" reais.\n"  + juros + " Ao m√™s! "+"\n" + "Valor total: R$ " + juros+valorFina+" reais.");
 					} else {
 						JOptionPane.showMessageDialog(null, "Error no finasciamento!!!");
 					}
@@ -176,7 +274,7 @@ public class SistemaBancarioRA {
 					JOptionPane.showMessageDialog(null, "Verificar saldo");
 
 				} else if (opcao == 9) {
-					JOptionPane.showMessageDialog(null, "HistÛrico de transaÁıes");
+					JOptionPane.showMessageDialog(null, "Hist√≥rico de transa√ß√µes");
 
 				} else if (opcao == 10) {
 					menu = 10;
@@ -184,17 +282,17 @@ public class SistemaBancarioRA {
 					return;
 
 				} else {
-					JOptionPane.showMessageDialog(null, "OperaÁ„o inv·lida, tente novamente!");
+					JOptionPane.showMessageDialog(null, "Opera√ß√£o inv√°lida, tente novamente!");
 				}
-				System.out.println("Aqui " + -saldo);
+				System.out.println("Aqui " + -saldo[numConta]);
 				contRedimenAplic++;
 				contRedimenPoupa++;
 				if (contRedimenAplic > 2 && contRedimenAplic % 3 == 0) {
-					saldo = ((rendimentoAplicacaoFundo * saldo) + ((redimentoPoupaca * saldo) + saldo));
+					saldo[numConta] = ((rendimentoAplicacaoFundo * saldo[numConta]) + ((redimentoPoupaca * saldo[numConta]) + saldo[numConta]));
 					System.out.println(saldo);
 				}
 				/* Apagar depois */
-				System.out.println("Aqui " + -saldo);
+				System.out.println("Aqui " + -saldo[numConta]);
 				System.out.println(contRedimenAplic);
 				System.out.println(contRedimenPoupa);
 				System.out.println(saldo);
