@@ -25,14 +25,20 @@ public class Sistema {
 
 	static int cont = 0;
 	
+
+	
 	public static void vetorVazio(int num) {
+		int numero = 0;
+		while(historico[numero] != null) {
+			numero += 1;
+			historico[numero];
+		}
 		for(int i = 0; i > historico.length; i++) {
-			if(historico[num] == null) {
-				cont= i;
+			if(historico[i] == null) {
+				
 			}
 		}
 	}
-	
 	
 	public static void historicos(int num) {
 				switch (num) {
@@ -401,9 +407,11 @@ public class Sistema {
 				} else if (opcao == 9) {
 					JOptionPane.showMessageDialog(null, "Histórico de transações");
 					for(int i =0; i <= historico.length; i++) {
-						System.out.println("Array vazio");
+						if(historico[i] != null) {
+							JOptionPane.showMessageDialog(null, historico[i]);
+							 break;
+						}
 					}
-					
 
 				} else if (opcao == 10) {
 					menu = 10;
